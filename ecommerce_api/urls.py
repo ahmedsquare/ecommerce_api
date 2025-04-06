@@ -7,7 +7,8 @@ def home(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('products.urls')),
-    path('api/auth/', include('users.urls')),
-    path('', home, name='home'),  # Add this line to handle the root path
+    path('products/', include('products.urls')),
+    path('auth/', include('users.urls')),
+    path('orders/', include('orders.urls')),  
+    path('', home, name='home'), 
 ]

@@ -1,0 +1,7 @@
+<!-- templates/orders/order_create.html -->
+<h2>Create Order</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Order</button>
+</form>

@@ -1,0 +1,16 @@
+<!-- orders/templates/orders/order_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Detail</title>
+</head>
+<body>
+    <h1>Order {{ order.id }}</h1>
+    <p>Customer: {{ order.customer.username }}</p>
+    <p>Product: {{ order.product.name }}</p>
+    <p>Quantity: {{ order.quantity }}</p>
+    <p>Total Price: ${{ order.total_price }}</p>
+    <p>Created at: {{ order.created_at }}</p>
+    <a href="{% url 'order_list' %}">Back to Order List</a>
+</body>
+</html>

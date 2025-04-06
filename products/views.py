@@ -1,12 +1,21 @@
-from rest_framework import viewsets, permissions
+# products/views.py
+
+from rest_framework import viewsets
+from rest_framework import permissions
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Product
 from .serializers import ProductSerializer
-from rest_framework import filters
+from .filters import ProductFilter
+from rest_framework.pagination import PageNumberPagination
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all().order_by('-created_at')
+    queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['name', 'category', 'artist_name', 'medium']
-    ordering_fields = ['created_at', 'price']
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly] 
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = ProductFilter
+
+class ProductPagination(PageNumberPagination):
+    page_size = 10  # Define number of items per page
+    page_size_query_param = 'page_size'
+    max_page_size = 100
